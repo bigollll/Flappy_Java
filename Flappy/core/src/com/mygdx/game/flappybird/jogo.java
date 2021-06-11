@@ -317,8 +317,8 @@ public class jogo extends ApplicationAdapter {
         circuloPassaro.set(50 + passaros[0].getWidth() / 2, posicaoInicialVerticalPassaro + passaros[0].getHeight() / 2, passaros[0].getWidth() / 2);                                     //associando o circulo do collider ao passaro.
         retanguloCanoBaixo.set(posicaoCanoHorizontal, alturaDispositivo / 2 - canoBaixo.getHeight() - espaçoEntreCanos / 2 + posicaoCanoVertical, canoBaixo.getWidth(), canoBaixo.getHeight());     //associando o retangulo do collider ao cano baixo.
         retanguloCanoCima.set(posicaoCanoHorizontal, alturaDispositivo / 2 + espaçoEntreCanos / 2 + posicaoCanoVertical, canoTopo.getWidth(), canoTopo.getHeight() );                               //associando o retangulo do collider ao cano topo.
-        circuloCoinOuro.set(ouroCoin.getHeight(), 300 + posicaoCoinVertical + ouroCoin.getHeight() / 2, ouroCoin.getWidth() );
-        circuloCoinPrata.set(prataCoin.getHeight(), 300 + posicaoCoinVertical + ouroCoin.getHeight() / 2, prataCoin.getWidth() );
+        circuloCoinOuro.set(ouroCoin.getHeight(), 300 + posicaoCoinVertical + ouroCoin.getHeight() / 2, ouroCoin.getWidth() );                                                                      //"coloca o collider na moeda"
+        circuloCoinPrata.set(prataCoin.getHeight(), 300 + posicaoCoinVertical + ouroCoin.getHeight() / 2, prataCoin.getWidth() );                                                                  //"coloca o collider na moeda"
 
 
         boolean colisaoCanoCima = Intersector.overlaps(circuloPassaro, retanguloCanoCima);           //se bateu ou nao no cano.
