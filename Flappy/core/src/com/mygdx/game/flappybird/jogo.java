@@ -150,6 +150,7 @@ public class jogo extends ApplicationAdapter {
         alturaDispositivo = VIRTUAL_HEIGHT;                     //pega a altura generica do dispositivo passado na variavel.
         posicaoInicialVerticalPassaro = alturaDispositivo / 2;  //posiciona o passaro no meio da tela.
         posicaoCanoHorizontal = larguraDispositivo;             //iguala a posiçao do cano com o tamanho da tela.
+
         espaçoEntreCanos = 350;                                 //espaçamento entre os canos na tela.
 
         textoPontuacao = new BitmapFont();                      //falando que o texto é um bitmapFont.
@@ -213,16 +214,16 @@ public class jogo extends ApplicationAdapter {
 
             posicaoCoinHorizontal -= Gdx.graphics.getDeltaTime() * 200;       //movimentação e velocidade da moeda
 
-            if(posicaoCoinHorizontal < - ouroCoin.getWidth())
+            if(posicaoCoinHorizontal < - ouroCoin.getWidth())                 //faz a moeda desaparecer
             {
-                posicaoCoinHorizontal = larguraDispositivo;
-                posicaoCoinVertical = random.nextInt(200) - 200;
+                posicaoCoinHorizontal = larguraDispositivo;                   //iguala a posição coin a largura do dispositivo
+                posicaoCoinVertical = random.nextInt(200) - 200;           // faz vir randomicamento segundo os parametros
             }
 
-            if(posicaoCoinHorizontal < - prataCoin.getWidth())
+            if(posicaoCoinHorizontal < - prataCoin.getWidth())              //faz a moeda desaparecer
             {
-                posicaoCoinHorizontal = larguraDispositivo;
-                posicaoCoinVertical = random.nextInt(200) - 200;
+                posicaoCoinHorizontal = larguraDispositivo;                 //iguala a posição coin a largura do dispositivo
+                posicaoCoinVertical = random.nextInt(200) - 200;         // faz vir randomicamento segundo os parametros
             }
 
 
@@ -316,8 +317,9 @@ public class jogo extends ApplicationAdapter {
         circuloPassaro.set(50 + passaros[0].getWidth() / 2, posicaoInicialVerticalPassaro + passaros[0].getHeight() / 2, passaros[0].getWidth() / 2);                                     //associando o circulo do collider ao passaro.
         retanguloCanoBaixo.set(posicaoCanoHorizontal, alturaDispositivo / 2 - canoBaixo.getHeight() - espaçoEntreCanos / 2 + posicaoCanoVertical, canoBaixo.getWidth(), canoBaixo.getHeight());     //associando o retangulo do collider ao cano baixo.
         retanguloCanoCima.set(posicaoCanoHorizontal, alturaDispositivo / 2 + espaçoEntreCanos / 2 + posicaoCanoVertical, canoTopo.getWidth(), canoTopo.getHeight() );                               //associando o retangulo do collider ao cano topo.
-        //circuloCoinOuro.set(ouroCoin.getWidth(), );
-        //circuloCoinPrata.set();
+        circuloCoinOuro.set(ouroCoin.getHeight(), 300 + posicaoCoinVertical + ouroCoin.getHeight() / 2, ouroCoin.getWidth() );
+        circuloCoinPrata.set(prataCoin.getHeight(), 300 + posicaoCoinVertical + ouroCoin.getHeight() / 2, prataCoin.getWidth() );
+
 
         boolean colisaoCanoCima = Intersector.overlaps(circuloPassaro, retanguloCanoCima);           //se bateu ou nao no cano.
         boolean colisaoCanoBaixo = Intersector.overlaps(circuloPassaro, retanguloCanoBaixo);         //se bateu ou nao no cano.
@@ -333,13 +335,16 @@ public class jogo extends ApplicationAdapter {
            }
         }
 
-        if(colisaoCoinOuro){               //se colidir com a moeda
-            somCoin.play();                //da play no som
-            pontos = pontos + 10;          //incrementa os pontos
+        if(estadoJogo == 1){
+            if(colisaoCoinOuro){               //se colidir com a moeda
+                somCoin.play();                //da play no som
+                pontos = pontos + 10;          //incrementa os pontos
+            }
+            if(colisaoCoinPrata){             //se colidir com a moeda
+                pontos = pontos + 5;          //incremente os pontos
+                somCoin.play();               // da play no som
+            }
         }
-        if(colisaoCoinPrata){             //se colidir com a moeda
-            pontos = pontos + 5;          //incremente os pontos
-            somCoin.play();               // da play no som
-        }
+
     }
 }
